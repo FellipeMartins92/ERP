@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Clientes</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container mt-5">
+
+    <h2 class="mb-4">Clientes Cadastrados</h2>
+
+    <table class="table table-striped table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>Nome</th>
+                <th>Tipo de Cliente</th>
+                <th>Classe do Cliente</th>
+                <th>CEP</th>
+                <th>Rua</th>
+                <th>Bairro</th>
+                <th>Estado</th>
+                <th>País</th>
+                <th>Data de Cadastro</th>
+                <th>Aniversário</th>
+                <th>Ativo</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cliente in clientes %}
+            <tr>
+                <td>{{ cliente.Nome }}</td>
+                <td>{{ cliente.Tipo_Cliente.Descricao }}</td>
+                <td>{{ cliente.Classe_Cliente.Descricao }}</td>
+                <td>{{ cliente.Endereco_Cliente.CEP }}</td>
+                <td>{{ cliente.Endereco_Cliente.Rua }}</td>
+                <td>{{ cliente.Endereco_Cliente.Bairro }}</td>
+                <td>{{ cliente.Endereco_Cliente.Estado }}</td>
+                <td>{{ cliente.Endereco_Cliente.Pais }}</td>
+                <td>{{ cliente.Data_Cadastro }}</td>
+                <td>{{ cliente.Aniversario_Cliente }}</td>
+                <td>{{ cliente.Ativo|yesno:"Sim,Não" }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="11" class="text-center">Nenhum cliente cadastrado.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+</html>

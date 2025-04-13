@@ -1,0 +1,37 @@
+[
+    {
+      "model": "Clientes.Classe_Cliente",
+      "pk": 1,
+      "fields": {
+        "Descricao": "Empresa de Pequeno Porte (EPP)"
+      }
+    },
+    {
+      "model": "Clientes.Classe_Cliente",
+      "pk": 2,
+      "fields": {
+        "Descricao": "Microempreendedor Individual (MEI)"
+      }
+    },
+    {
+      "model": "Clientes.Classe_Cliente",
+      "pk": 3,
+      "fields": {
+        "Descricao": "Microempresa"
+      }
+    },
+    {
+      "model": "Clientes.Classe_Cliente",
+      "pk": 4,
+      "fields": {
+        "Descricao": "Empresa de Médio Porte"
+      }
+    },
+    {
+      "model": "Clientes.Classe_Cliente",
+      "pk": 5,
+      "fields": {
+        "Descricao": "Empresa de Grande Porte"
+      }
+    }
+  ]

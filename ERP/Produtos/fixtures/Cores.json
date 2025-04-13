@@ -1,0 +1,9 @@
+[
+    {
+        "model": "Produtos.Cor",
+        "pk": 1,
+        "fields": {
+            "Descricao": "Padrão"
+        }
+    }
+]

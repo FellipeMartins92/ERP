@@ -1,0 +1,10 @@
+[
+    {
+        "model": "Produtos.Tamanho",
+        "pk": 1,
+        "fields": {
+          "Descricao": "Padrão",
+          "Sigla": "P"
+        }        
+    }
+]

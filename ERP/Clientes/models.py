@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.timezone import now
 
 class Tipo_Cliente(models.Model):
     Descricao = models.CharField(max_length=255)
@@ -18,7 +19,7 @@ class Cliente(models.Model):
     Tipo_Cliente = models.ForeignKey(Tipo_Cliente,on_delete=models.CASCADE, related_name="Tipo")
     Endereco_Cliente = models.ForeignKey(Endereco, on_delete=models.CASCADE, related_name="Endereco")
     Classe_Cliente = models.ForeignKey(Classe_Cliente,on_delete=models.CASCADE, related_name="Tipo")   
-    Data_Cadastro = models.DateField()
+    Data_Cadastro = models.DateField(default=now)
     Aniversario_Cliente = models.DateField()
     Ativo = models.BooleanField(default=True)
 

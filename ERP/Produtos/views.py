@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
 from .forms import *
 
@@ -71,5 +71,35 @@ def Listar_Produtos(request):
     produtos = Produtos.objects.all()
     return render(request, 'Produtos/Listar_Produtos.html', {'produtos': produtos})
 
+
+def Editar_Produtos(request, Id):
+    produtos = get_object_or_404(Produtos.objects.select_related('Tamanho','Categoria', 'Cor'), id=Id)
+    tamanhos = Tamanho.objects.all()
+    categorias = Categoria.objects.all()
+    cores = Cor.objects.all()
+    return render(request, "Produtos/Editar_Produtos.html", {
+        'produto': produtos,
+        'tamanhos': tamanhos,
+        'categorias': categorias,
+        'cores': cores
+    })
+
+def Excluir_Produto(request, Id):
+    produtos = get_object_or_404(Produtos, id=Id)
+    produtos.delete()
+    return redirect('Listar_Produtos')
+
+def Salvar_Produto_Editado(request,Id):
+    produtos = get_object_or_404(Produtos, id=Id)
+
+    if request.method == 'POST':
+        form = ProdutoForm(request.POST, instance=produtos)
+        if form.is_valid():
+            form.save()
+            return redirect('Listar_Produtos')
+    else:
+        form = ProdutoForm(instance=produtos)
+
+    return render(request, "Produtos/Listar_Produtos.html")
 
 # Create your views here.

@@ -6,16 +6,22 @@
     <title>Cadastro de Tipo de Cliente</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body class="container mt-4">
-    <h2>Cadastro de Tipo de Cliente</h2>
+<body>
 
-    <form method="POST" action="{% url 'Salvar_Tipos_Cliente' %}">
-        {% csrf_token %}
-        <div class="mb-3">
-            <label for="Descricao" class="form-label">Descrição</label>
-            <input type="text" class="form-control" id="Descricao" name="Descricao" required>
-        </div>
-        <button type="submit" class="btn btn-primary">Salvar</button>
-    </form>
+    {% include 'partials/HeaderBase.html' %}
+
+    <section class="container mt-4">
+        <h2>Cadastro de Tipo de Cliente</h2>
+
+        <form method="POST" action="{% url 'Salvar_Tipos_Cliente' %}">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="Descricao" class="form-label">Descrição</label>
+                <input type="text" class="form-control" id="Descricao" name="Descricao" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Salvar</button>
+        </form>
+    </section>
+
 </body>
 </html>

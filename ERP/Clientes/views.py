@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from .models import *
 from .forms import *
@@ -25,6 +25,36 @@ def Salvar_Cliente(request):
         form = ClienteForm()
 
     return render(request, 'Clientes/Cadastro_Cliente.html', {'form': form})
+
+def Editar_Clientes(request, Id):
+    cliente = get_object_or_404(Cliente.objects.select_related('Endereco_Cliente').prefetch_related('Tipo_Cliente', 'Classe_Cliente'), id=Id)
+    tipos_cliente = Tipo_Cliente.objects.all()
+    classes_cliente = Classe_Cliente.objects.all()
+    enderecos = Endereco.objects.all()
+    return render(request, "Clientes/Editar_Clientes.html", {
+        'cliente': cliente,
+        'tipos_cliente': tipos_cliente,
+        'classes_cliente': classes_cliente,
+        'enderecos': enderecos
+    })
+
+def Excluir_Cliente(request, Id):
+    cliente = get_object_or_404(Cliente, id=Id)
+    cliente.delete()
+    return redirect('Listar_Clientes')
+
+def Salvar_Cliente_Editado(request,Id):
+    cliente = get_object_or_404(Cliente, id=Id)
+
+    if request.method == 'POST':
+        form = ClienteForm(request.POST, instance=cliente)
+        if form.is_valid():
+            form.save()
+            return redirect('Listar_Clientes')
+    else:
+        form = ClienteForm(instance=cliente)
+
+    return render(request, "Clientes/Listar_Clientes.html")
 
 def Listar_Clientes(request):
     clientes = Cliente.objects.select_related(

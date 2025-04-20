@@ -44,7 +44,8 @@ INSTALLED_APPS = [
 
     #Meus
     'Clientes.apps.ClientesConfig',
-    'Produtos.apps.ProdutosConfig'
+    'Produtos.apps.ProdutosConfig',
+    'Pedidos.apps.PedidosConfig',
 
 ]
 

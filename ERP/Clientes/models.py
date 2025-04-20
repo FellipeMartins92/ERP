@@ -18,7 +18,7 @@ class Cliente(models.Model):
     Nome = models.CharField(max_length=150)
     Tipo_Cliente = models.ForeignKey(Tipo_Cliente,on_delete=models.CASCADE, related_name="Tipo")
     Endereco_Cliente = models.ForeignKey(Endereco, on_delete=models.CASCADE, related_name="Endereco")
-    Classe_Cliente = models.ForeignKey(Classe_Cliente,on_delete=models.CASCADE, related_name="Tipo")   
+    Classe_Cliente = models.ForeignKey(Classe_Cliente,on_delete=models.CASCADE, related_name="Classe")   
     Data_Cadastro = models.DateField(default=now)
     Aniversario_Cliente = models.DateField()
     Ativo = models.BooleanField(default=True)

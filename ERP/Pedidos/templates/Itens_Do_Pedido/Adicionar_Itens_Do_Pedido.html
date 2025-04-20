@@ -42,38 +42,47 @@
 
     <hr class="my-5">
 
-    <h4 class="mb-3">Itens já adicionados</h4>
-
-{% if itens %}
-    <table class="table table-bordered table-striped">
-        <thead class="table-dark">
-            <tr>
-                <th>Produto</th>
-                <th>Valor Unitário</th>
-                <th>Quantidade</th>
-                <th>Subtotal</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for item in itens %}
-                <tr>
-                    <td>{{ item.Produto.Descricao }}</td>
-                    <td>R$ {{ item.Valor|floatformat:2 }}</td>
-                    <td>{{ item.Quantidade }}</td>
-                    <td>R$ {{ item.SubTotal|floatformat:2 }}</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-        <tfoot>
-            <tr class="table-secondary">
-                <td colspan="3" class="text-end"><strong>Total:</strong></td>
-                <td colspan="2"><strong>R$ {{ pedido.Valor_Total|floatformat:2 }}</strong></td>
-            </tr>
-        </tfoot>
-    </table>
-{% else %}
-    <p class="text-muted">Nenhum item foi adicionado ao pedido ainda.</p>
-{% endif %}
+    <div class="container">
+        <h4 class="mb-3 text-center">Itens já adicionados</h4>
+    
+        {% if itens %}
+            <div class="table-responsive mx-auto" style="max-width: 900px;">
+                <table class="table table-bordered table-striped">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Produto</th>
+                            <th>Valor Unitário</th>
+                            <th>Quantidade</th>
+                            <th>Subtotal</th>
+                            <th>Opções</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in itens %}
+                            <tr>
+                                <td>{{ item.Produto.Descricao }}</td>
+                                <td>R$ {{ item.Valor|floatformat:2 }}</td>
+                                <td>{{ item.Quantidade }}</td>                                
+                                <td>R$ {{ item.SubTotal|floatformat:2 }}</td>
+                                <td>
+                                    <a href="{% url 'Excluir_Item_Do_Pedido' item.id %}">Excluir</a>
+                                </td>                              
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                    <tfoot>
+                        <tr class="table-secondary">
+                            <td colspan="4" class="text-end"><strong>Total:</strong></td>
+                            <td><strong>R$ {{ pedido.Valor_Total|floatformat:2 }}</strong></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        {% else %}
+            <p class="text-muted text-center">Nenhum item foi adicionado ao pedido ainda.</p>
+        {% endif %}
+    </div>
+    
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

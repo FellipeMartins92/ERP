@@ -27,26 +27,35 @@ def Salvar_Pedido(request):
 
 def Listar_Pedidos(request):
     pedidos = Pedidos.objects.all()
+    pedido_id = request.GET.get('pedido_id')
+    itens = []
 
-    return render(request, "Pedidos/Listar_Pedidos.html", {"pedidos": pedidos})
+    if pedido_id:
+        try:
+            pedido = get_object_or_404(Pedidos, id=pedido_id)
+            itens = Itens_Pedido.objects.filter(Pedido=pedido)
+        except Pedidos.DoesNotExist:
+            pedido = None 
 
-#Itens do Pedido
-
-def Adicionar_Itens_Do_Pedido(request, Id):
-    pedido = get_object_or_404(Pedidos, id=Id)
-    itens_do_pedido = Itens_Pedido.objects.filter(Pedido=pedido)
-    produtos = Produtos.objects.all()
-
-    return render(request, "Itens_Do_Pedido/Adicionar_Itens_Do_Pedido.html", {
-        "pedido": pedido,
-        "itens_do_pedido": itens_do_pedido,
-        "produtos": produtos
-    })
+    return render(request, 'Pedidos/Listar_Pedidos.html', {'pedidos': pedidos,'itens': itens})
 
 def Excluir_Pedido(request, Id):
     pedido = get_object_or_404(Pedidos, id=Id)
     pedido.delete()
     return redirect('Listar_Pedidos')    
+
+#Itens do Pedido
+
+def Adicionar_Itens_Do_Pedido(request, Id):
+    pedido = get_object_or_404(Pedidos, id=Id)
+    itens = Itens_Pedido.objects.filter(Pedido=pedido)
+    produtos = Produtos.objects.all()
+
+    return render(request, "Itens_Do_Pedido/Adicionar_Itens_Do_Pedido.html", {
+        "pedido": pedido,
+        "itens": itens,
+        "produtos": produtos
+    })
 
 def Salvar_Itens_Do_Pedido(request, pedido_id):
     if (request.method == 'POST'):
@@ -66,9 +75,20 @@ def Salvar_Itens_Do_Pedido(request, pedido_id):
         pedido.Valor_Total += item_pedido.SubTotal()
         pedido.save()
 
-        ##return redirect('Adicionar_Itens_Pedido', id=pedido_id)
-        return redirect('Listar_Pedidos')
+        return Adicionar_Itens_Do_Pedido(request,pedido_id)
 
     return redirect('Listar_Pedidos')
+
+def Excluir_Item_Do_Pedido(request, Item_pedido_id):
+    item_pedido = get_object_or_404(Itens_Pedido, id=Item_pedido_id)
+    pedido = item_pedido.Pedido
+
+    pedido.Valor_Total -= item_pedido.SubTotal()
+    pedido.save()
+
+    item_pedido.delete()
+
+    return redirect(request.META.get('HTTP_REFERER', 'Listar_Pedidos'))
+   
 
 

@@ -11,6 +11,6 @@ urlpatterns = [
     #Itens de Pedido
     path('Adicionar_Itens_Do_Pedido/<int:Id>', views.Adicionar_Itens_Do_Pedido, name='Adicionar_Itens_Do_Pedido'),
     path('Salvar_Itens_Do_Pedido/<int:pedido_id>/', views.Salvar_Itens_Do_Pedido, name='Salvar_Itens_Do_Pedido'),
-
-
+    path('Excluir_Item_Do_Pedido/<int:Item_pedido_id>/', views.Excluir_Item_Do_Pedido, name='Excluir_Item_Do_Pedido'),
+    
 ]

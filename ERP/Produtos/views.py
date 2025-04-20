@@ -5,48 +5,60 @@ from .forms import *
 
 #Tamanhos
 def Cadastro_Tamanhos(request):
-    return render(request,"Tamanho/Cadastro_Tamanhos.html")    
+    tamanhos = Tamanho.objects.all()
+    return render(request,"Tamanho/Cadastro_Tamanhos.html",{"tamanhos":tamanhos})    
 
 def Salvar_Tamanhos(request):
     if request.method == 'POST':
         form = TamanhoForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect("/")
-    else:
-        form = TamanhoForm()    
+            return Cadastro_Tamanhos(request)
 
-    return render(request, 'Tamanho/Cadastro_Tamanhos.html', {'form': form})    
+    return Cadastro_Tamanhos(request)
+
+def Excluir_Tamanho(request,Id):
+    tamanho = get_object_or_404(Tamanho, id=Id)
+    tamanho.delete()
+    return Cadastro_Tamanhos(request)
 
 #Cores
 def Cadastro_Cores(request):
-    return render(request,"Cor/Cadastro_Cores.html")    
+    cores = Cor.objects.all()
+    return render(request,"Cor/Cadastro_Cores.html",{"cores":cores})    
 
 def Salvar_Cores(request):
     if request.method == 'POST':
         form = CorForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect("/")
+            return Cadastro_Cores(request)
     else:
-        form = CorForm()    
+        return Cadastro_Cores(request)
 
-    return render(request, 'Cor/Cadastro_Cores.html', {'form': form})
+def Excluir_Cor(request,Id):
+    cor = get_object_or_404(Cor, id=Id)
+    cor.delete()
+    return Cadastro_Cores(request)
 
 #Categorias    
 def Cadastro_Categorias(request):
-    return render(request,"Categorias/Cadastro_Categorias.html")    
+    categorias = Categoria.objects.all()
+    return render(request,"Categorias/Cadastro_Categorias.html",{"categorias": categorias})    
 
 def Salvar_Categorias(request):
     if request.method == 'POST':
         form = CategoriaForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect("/")
+            return Cadastro_Categorias(request)
     else:
-        form = CategoriaForm()    
+        return Cadastro_Categorias(request)
 
-    return render(request, 'Categorias/Cadastro_Categorias.html', {'form': form})
+def Excluir_Categoria(request,Id):
+    categoria = get_object_or_404(Categoria, id=Id)
+    categoria.delete()
+    return Cadastro_Categorias(request)
 
 #Produtos
 def Cadastro_Produtos(request):

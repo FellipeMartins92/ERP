@@ -27,5 +27,39 @@
         </form>
     </section>
 
+    <hr class="my-5">
+
+    <div class="container">
+        <h4 class="mb-3 text-center">Tamanhos já adicionados</h4>
+    
+        {% if tamanhos %}
+            <div class="table-responsive mx-auto" style="max-width: 900px;">
+                <table class="table table-bordered table-striped">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Tamanho</th>
+                            <th>Sigla</th>
+                            <th>Opções</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for tamanho in tamanhos %}
+                            <tr>
+                                <td>{{ tamanho.Descricao }}</td>
+                                <td>{{ tamanho.Sigla }}</td>
+                                <td>
+                                    <a href="{% url 'Excluir_Tamanho' tamanho.id %}">Excluir</a>
+                                </td>                              
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <p class="text-muted text-center">Nenhum tamanho adicionado ainda.</p>
+        {% endif %}
+    </div>
+
+
 </body>
 </html>

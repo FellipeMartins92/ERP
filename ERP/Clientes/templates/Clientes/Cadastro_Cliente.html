@@ -30,18 +30,6 @@
             </div>
 
             <div class="mb-3">
-                <label for="Endereco_Cliente" class="form-label">Endereço</label>
-                <select class="form-select" id="Endereco_Cliente" name="Endereco_Cliente" required>
-                    <option value="" disabled selected>Selecione um Endereço</option>
-                    {% for endereco in enderecos %}
-                        <option value="{{ endereco.id }}">
-                            {{ endereco.Rua }}, {{ endereco.Bairro }} - {{ endereco.CEP }}, {{ endereco.Estado }}, {{ endereco.Pais }}
-                        </option>
-                    {% endfor %}
-                </select>
-            </div>
-
-            <div class="mb-3">
                 <label for="Classe_Cliente" class="form-label">Classe do Cliente</label>
                 <select class="form-select" id="Classe_Cliente" name="Classe_Cliente" required>
                     {% for classe_cliente in classes_cliente %}
@@ -58,6 +46,27 @@
             <div hidden class="form-check mb-3">
                 <input type="checkbox" class="form-check-input" id="Ativo" name="Ativo" checked>
                 <label class="form-check-label" for="Ativo">Ativo</label>
+            </div>
+
+            <div class="mb-3">
+                <label for="CEP" class="form-label">CEP</label>
+                <input type="text" class="form-control" id="CEP" name="CEP" required>
+            </div>
+            <div class="mb-3">
+                <label for="Rua" class="form-label">Rua</label>
+                <input type="text" class="form-control" id="Rua" name="Rua" required>
+            </div>
+            <div class="mb-3">
+                <label for="Bairro" class="form-label">Bairro</label>
+                <input type="text" class="form-control" id="Bairro" name="Bairro" required>
+            </div>
+            <div class="mb-3">
+                <label for="Estado" class="form-label">Estado</label>
+                <input type="text" class="form-control" id="Estado" name="Estado" required>
+            </div>
+            <div class="mb-3">
+                <label for="Pais" class="form-label">País</label>
+                <input type="text" class="form-control" id="Pais" name="Pais" required>
             </div>
 
             <button type="submit" class="btn btn-primary">Cadastrar</button>

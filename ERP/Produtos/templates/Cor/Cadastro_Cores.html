@@ -23,5 +23,36 @@
         </form>
     </section>
 
+    <hr class="my-5">
+
+    <div class="container">
+        <h4 class="mb-3 text-center">Cores já adicionadas</h4>
+    
+        {% if cores %}
+            <div class="table-responsive mx-auto" style="max-width: 900px;">
+                <table class="table table-bordered table-striped">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Cor</th>
+                            <th>Opções</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for cor in cores %}
+                            <tr>
+                                <td>{{ cor.Descricao }}</td>
+                                <td>
+                                    <a href="{% url 'Excluir_Cor' cor.id %}">Excluir</a>
+                                </td>                              
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <p class="text-muted text-center">Nenhuma cor adicionada ainda.</p>
+        {% endif %}
+    </div>
+
 </body>
 </html>

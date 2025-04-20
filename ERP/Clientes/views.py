@@ -10,8 +10,7 @@ from .forms import *
 def Cadastro_Clientes(request):
     tipos_cliente = Tipo_Cliente.objects.all()
     classes_cliente = Classe_Cliente.objects.all()
-    enderecos = Endereco.objects.all()
-    return render(request,"Clientes/Cadastro_Cliente.html",{"tipos_cliente": tipos_cliente,"classes_cliente": classes_cliente,"enderecos": enderecos})
+    return render(request,"Clientes/Cadastro_Cliente.html",{"tipos_cliente": tipos_cliente,"classes_cliente": classes_cliente})
 
 def Salvar_Cliente(request):
     print(request.method)
@@ -27,15 +26,13 @@ def Salvar_Cliente(request):
     return render(request, 'Clientes/Cadastro_Cliente.html', {'form': form})
 
 def Editar_Clientes(request, Id):
-    cliente = get_object_or_404(Cliente.objects.select_related('Endereco_Cliente').prefetch_related('Tipo_Cliente', 'Classe_Cliente'), id=Id)
+    cliente = get_object_or_404(Cliente.objects.prefetch_related('Tipo_Cliente', 'Classe_Cliente'), id=Id)
     tipos_cliente = Tipo_Cliente.objects.all()
     classes_cliente = Classe_Cliente.objects.all()
-    enderecos = Endereco.objects.all()
     return render(request, "Clientes/Editar_Clientes.html", {
         'cliente': cliente,
         'tipos_cliente': tipos_cliente,
         'classes_cliente': classes_cliente,
-        'enderecos': enderecos
     })
 
 def Excluir_Cliente(request, Id):
@@ -58,8 +55,8 @@ def Salvar_Cliente_Editado(request,Id):
 
 def Listar_Clientes(request):
     clientes = Cliente.objects.select_related(
-        'Tipo_Cliente', 'Classe_Cliente', 'Endereco_Cliente'
-    ).order_by('Nome')  # Ordena por nome, por exemplo
+        'Tipo_Cliente', 'Classe_Cliente'
+    ).order_by('Nome') 
 
     return render(request, "Clientes/Listar_Clientes.html", {"clientes": clientes})
 
@@ -78,19 +75,3 @@ def Salvar_Tipos_Cliente(request):
         form = Tipo_ClienteForm()    
 
     return render(request, 'Tipo_Cliente/Cadastro_Tipo_Cliente.html', {'form': form})
-
-#Endereco
-
-def Cadastro_Endereco(request):
-    return render(request,"Endereco/Cadastro_Endereco.html")
-
-def Salvar_Endereco(request):
-    if request.method == 'POST':
-        form = EnderecoForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect("/")
-    else:
-        form = EnderecoForm()    
-
-    return render(request, 'Endereco/Cadastro_Endereco.html', {'form': form})

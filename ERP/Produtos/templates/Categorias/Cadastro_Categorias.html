@@ -22,5 +22,37 @@
             <button type="submit" class="btn btn-primary">Salvar</button>
         </form>
     </section>
+
+    <hr class="my-5">
+
+    <div class="container">
+        <h4 class="mb-3 text-center">Categorias já adicionadas</h4>
+    
+        {% if categorias %}
+            <div class="table-responsive mx-auto" style="max-width: 900px;">
+                <table class="table table-bordered table-striped">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Categoria</th>
+                            <th>Opções</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for categoria in categorias %}
+                            <tr>
+                                <td>{{ categoria.Descricao }}</td>
+                                <td>
+                                    <a href="{% url 'Excluir_Categoria' categoria.id %}">Excluir</a>
+                                </td>                              
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <p class="text-muted text-center">Nenhuma categoria adicionada ainda.</p>
+        {% endif %}
+    </div>
+
 </body>
 </html>

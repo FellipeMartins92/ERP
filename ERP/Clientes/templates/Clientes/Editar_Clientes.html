@@ -38,18 +38,6 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="Endereco_Cliente" class="form-label">Endereço</label>
-                                <select class="form-select" id="Endereco_Cliente" name="Endereco_Cliente" required>
-                                    <option value="" disabled>Selecione um Endereço</option>
-                                    {% for endereco in enderecos %}
-                                        <option value="{{ endereco.id }}" {% if endereco.id == cliente.Endereco_Cliente.id %}selected{% endif %}>
-                                            {{ endereco.Rua }}, {{ endereco.Bairro }} - {{ endereco.CEP }}, {{ endereco.Estado }}, {{ endereco.Pais }}
-                                        </option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-
-                            <div class="mb-3">
                                 <label for="Classe_Cliente" class="form-label">Classe do Cliente</label>
                                 <select class="form-select" id="Classe_Cliente" name="Classe_Cliente" required>
                                     {% for classe_cliente in classes_cliente %}
@@ -64,6 +52,32 @@
                                 <label for="Aniversario_Cliente" class="form-label">Aniversário do Cliente</label>
                                 <input type="date" class="form-control" id="Aniversario_Cliente" name="Aniversario_Cliente" value="{{ cliente.Aniversario_Cliente|date:'Y-m-d' }}" required>
                             </div>
+
+                            <div class="mb-3">
+                                <label for="CEP" class="form-label">CEP</label>
+                                <input type="text" class="form-control" id="CEP" name="CEP" value="{{ cliente.CEP }}" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="Rua" class="form-label">Rua</label>
+                                <input type="text" class="form-control" id="Rua" name="Rua" value="{{ cliente.Rua }}" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="Bairro" class="form-label">Bairro</label>
+                                <input type="text" class="form-control" id="Bairro" name="Bairro" value="{{ cliente.Bairro }}" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="Estado" class="form-label">Estado</label>
+                                <input type="text" class="form-control" id="Estado" name="Estado" value="{{ cliente.Estado }}" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="Pais" class="form-label">País</label>
+                                <input type="text" class="form-control" id="Pais" name="Pais" value="{{ cliente.Pais }}" required>
+                            </div>
+
 
                             <div hidden class="form-check mb-3">
                                 <input type="checkbox" class="form-check-input" id="Ativo" name="Ativo" {% if cliente.Ativo %}checked{% endif %}>

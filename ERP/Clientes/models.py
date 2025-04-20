@@ -11,13 +11,15 @@ class Endereco(models.Model):
     Estado = models.CharField(max_length=100)
     Pais = models.CharField(max_length=100)
 
+    class Meta:
+        abstract = True
+
 class Classe_Cliente(models.Model):
     Descricao = models.CharField(max_length=50)
 
-class Cliente(models.Model):
+class Cliente(Endereco):
     Nome = models.CharField(max_length=150)
     Tipo_Cliente = models.ForeignKey(Tipo_Cliente,on_delete=models.CASCADE, related_name="Tipo")
-    Endereco_Cliente = models.ForeignKey(Endereco, on_delete=models.CASCADE, related_name="Endereco")
     Classe_Cliente = models.ForeignKey(Classe_Cliente,on_delete=models.CASCADE, related_name="Classe")   
     Data_Cadastro = models.DateField(default=now)
     Aniversario_Cliente = models.DateField()

@@ -16,4 +16,3 @@ class Produtos(models.Model):
     Tamanho =  models.ForeignKey(Tamanho, on_delete=models.CASCADE, related_name="Tamanho")
     Categoria =  models.ForeignKey(Categoria, on_delete=models.CASCADE, related_name="Categoria")
     Cor = models.ForeignKey(Cor, on_delete=models.CASCADE, related_name="Cor")
-    Valor = models.DecimalField(max_digits=10, decimal_places=2)

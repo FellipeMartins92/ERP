@@ -20,10 +20,8 @@ def Salvar_Pedido(request):
         if form.is_valid():
             pedido = form.save()
             return redirect('Adicionar_Itens_Do_Pedido', Id=pedido.id)
-    else:
-        form = PedidoForm()
 
-    return render(request, 'Pedidos/Cadastro_Pedido.html', {'form': form})
+    return render(request, 'Pedidos/Cadastro_Pedido.html')
 
 def Listar_Pedidos(request):
     pedidos = Pedidos.objects.all()

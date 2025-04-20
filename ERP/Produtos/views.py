@@ -13,7 +13,6 @@ def Salvar_Tamanhos(request):
         form = TamanhoForm(request.POST)
         if form.is_valid():
             form.save()
-            return Cadastro_Tamanhos(request)
 
     return Cadastro_Tamanhos(request)
 
@@ -32,9 +31,8 @@ def Salvar_Cores(request):
         form = CorForm(request.POST)
         if form.is_valid():
             form.save()
-            return Cadastro_Cores(request)
-    else:
-        return Cadastro_Cores(request)
+
+    return Cadastro_Cores(request)
 
 def Excluir_Cor(request,Id):
     cor = get_object_or_404(Cor, id=Id)
@@ -51,9 +49,8 @@ def Salvar_Categorias(request):
         form = CategoriaForm(request.POST)
         if form.is_valid():
             form.save()
-            return Cadastro_Categorias(request)
-    else:
-        return Cadastro_Categorias(request)
+
+    return Cadastro_Categorias(request)
 
 def Excluir_Categoria(request,Id):
     categoria = get_object_or_404(Categoria, id=Id)
@@ -73,11 +70,8 @@ def Salvar_Produtos(request):
         form = ProdutoForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect("/")
-    else:
-        form = ProdutoForm()    
 
-    return render(request, 'Produtos/Cadastro_Produtos.html', {'form': form})
+    return redirect('Listar_Produtos')
 
 def Listar_Produtos(request):
     produtos = Produtos.objects.all()
@@ -108,10 +102,7 @@ def Salvar_Produto_Editado(request,Id):
         form = ProdutoForm(request.POST, instance=produtos)
         if form.is_valid():
             form.save()
-            return redirect('Listar_Produtos')
-    else:
-        form = ProdutoForm(instance=produtos)
 
-    return render(request, "Produtos/Listar_Produtos.html")
+    return redirect('Listar_Produtos')
 
 # Create your views here.

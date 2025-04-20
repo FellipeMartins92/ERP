@@ -23,5 +23,36 @@
         </form>
     </section>
 
+    <hr class="my-5">
+
+    <div class="container">
+        <h4 class="mb-3 text-center">Tipos de Cliente já adicionados</h4>
+    
+        {% if Tipos_Cliente %}
+            <div class="table-responsive mx-auto" style="max-width: 900px;">
+                <table class="table table-bordered table-striped">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Tipo</th>
+                            <th>Opções</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for tipos in Tipos_Cliente %}
+                            <tr>
+                                <td>{{ tipos.Descricao }}</td>
+                                <td>
+                                    <a href="{% url 'Excluir_Tipo_Cliente' tipos.id %}">Excluir</a>
+                                </td>                              
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <p class="text-muted text-center">Nenhum Tipo de Cliente adicionado ainda.</p>
+        {% endif %}
+    </div>
+
 </body>
 </html>

@@ -13,4 +13,5 @@ urlpatterns = [
     #Tipos_Cliente
     path('Cadastro_Tipos_Cliente/', views.Cadastro_Tipos_Cliente, name='Cadastro_Tipos_Cliente'),
     path('Salvar_Tipos_Cliente/', views.Salvar_Tipos_Cliente, name='Salvar_Tipos_Cliente'),
+    path('Excluir_Tipo_Cliente//<int:Id>/',  views.Excluir_Tipo_Cliente, name='Excluir_Tipo_Cliente'),
 ]

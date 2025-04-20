@@ -19,11 +19,8 @@ def Salvar_Cliente(request):
         print(form.is_valid())
         if form.is_valid():
             form.save()
-            return redirect('Listar_Clientes')
-    else:
-        form = ClienteForm()
 
-    return render(request, 'Clientes/Cadastro_Cliente.html', {'form': form})
+    return redirect('Listar_Clientes')
 
 def Editar_Clientes(request, Id):
     cliente = get_object_or_404(Cliente.objects.prefetch_related('Tipo_Cliente', 'Classe_Cliente'), id=Id)
@@ -48,8 +45,6 @@ def Salvar_Cliente_Editado(request,Id):
         if form.is_valid():
             form.save()
             return redirect('Listar_Clientes')
-    else:
-        form = ClienteForm(instance=cliente)
 
     return render(request, "Clientes/Listar_Clientes.html")
 
@@ -63,15 +58,18 @@ def Listar_Clientes(request):
 #Tipo Cliente
 
 def Cadastro_Tipos_Cliente(request):
-    return render(request,"Tipo_Cliente/Cadastro_Tipo_Cliente.html")
+    Tipos_Cliente = Tipo_Cliente.objects.all()
+    return render(request,"Tipo_Cliente/Cadastro_Tipo_Cliente.html",{"Tipos_Cliente":Tipos_Cliente})
 
 def Salvar_Tipos_Cliente(request):
     if request.method == 'POST':
         form = Tipo_ClienteForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect("/")
-    else:
-        form = Tipo_ClienteForm()    
 
-    return render(request, 'Tipo_Cliente/Cadastro_Tipo_Cliente.html', {'form': form})
+    return Cadastro_Tipos_Cliente(request)
+
+def Excluir_Tipo_Cliente(request, Id):
+    tipo_cliente = get_object_or_404(Tipo_Cliente, id=Id)
+    tipo_cliente.delete()
+    return Cadastro_Tipos_Cliente(request)
